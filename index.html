@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+        <title>Generatori di siti statici | Linux Day Bari 2015 | Andrea Scarpino</title>
+
+		<meta name="description" content="Un'introduzione ai generatori di siti web statici">
+		<meta name="author" content="Andrea Scarpino">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <h1>Introduzione ai generatori di siti statici</h1>
+                    <p><small>di Andrea Scarpino</small></p>
+                    <br/>
+                    <p>Linux Day Bari 2015 - 24/10/2015</p>
+				</section>
+
+                <section>
+                    <section>
+                        <h2>Pagine statiche vs dinamiche</h2>
+                        <img src="images/statica.png">
+                        <img src="images/dinamica.png">
+                        <br/>
+                        <q>ma&#8230; dov'&egrave; la differenza?!</q>
+                    </section>
+
+                    <section>
+						<p style="text-align: left;"><small>Pagina HTML statica:</small></p>
+						<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Pagina statica&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Sono una pagina statica.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+						<p style="text-align: left;"><small>Pagina HTML dinamica in PHP:</small></p>
+						<pre><code>&lt;?php require_once("data.php"); ?&gt;
+&lt;html&gt;
+    &lt;head&gt;
+	&lt;title&gt;&lt;?php echo "$titolo"; ?&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+	&lt;?php echo "&lt;p&gt;$testo&lt;/p&gt;"; ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </section>
+
+					<section>
+                        <h2>Architettura statica vs dinamica</h2>
+                        <img src="images/cms-vs-static.png">
+					</section>
+				</section>
+
+				<section>
+                    <section>
+                        <h2>Perch&eacute; statico?</h2>
+	    				<ul>
+                            <li class="fragment">Sicurezza</li>
+                            <li class="fragment">Nessun interprete</li>
+                            <li class="fragment">Nessun applicativo sul server</li>
+                            <li class="fragment">Velocit&agrave; nel rispondere alle richieste</li>
+                            <li class="fragment">Scalabilit&agrave;</li>
+                            <li class="fragment">Facilit&agrave; nel deploy</li>
+				    	</ul>
+                    </section>
+
+                    <section>
+                        <h2>Dov'&egrave; l'inghippo?</h2>
+                        <ul>
+                            <li class="fragment">Nessuna "dinamicit&agrave;"
+                                <ul>
+                                    <li>Gestione dei commenti affidata a servizi esterni (Disqus, Discourse, Kaiju, &#8230;)</li>
+                                </ul>
+                            </li>
+                            <li class="fragment">I post si scrivono offline e sono "solo sul tuo pc"
+                                <ul>
+                                    <li>Copia su servizi esterni (Dropbox, GitHub, &#8230;)</li>
+                                </ul>
+                            </li>
+                            <li class="fragment">Bisogna conoscere il Markdown</li>
+                        </ul>
+                    </section>
+				</section>
+
+                <section>
+                    <h2>Generatori di siti statici</h2>
+                    <p>Ad oggi esistono circa <strong>400</strong> generatori di siti statici.</p>
+                    <p style="text-align: left;">I pi&ugrave; popolari sono:</p>
+                    <ul>
+                        <li class="fragment highlight-blue">Jekyll (Ruby, MIT)</li>
+                        <li>GitBook (JavaScript, Apache)</li>
+                        <li>Octopress (Ruby, MIT)</li>
+                        <li>Hexo (JavaScript, MIT)</li>
+                        <li>Hugo (Go, SimPL)</li>
+                        <li>Pelican (Python, AGPL)</li>
+                        <li>Brunch (JavaScript, MIT)</li>
+                        <li>Middleman (Ruby, MIT)</li>
+                    </ul>
+                    <p style="text-align: right;"><small>Fonte <a href="http://www.staticgen.com/">staticgen.com</a></small></p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Jekyll</h2>
+                        <p>Nasce nel 2008, sviluppato da Tom Preston-Werner</p>
+                        <p style="text-align: left;">Caratteristiche:</p>
+                        <ul>
+                            <li>Orientato per la scrittura di blog</li>
+                            <li>Articoli scritti in Markdown o Textile</li>
+                            <li>Offre degli script di import per molti CMS</li>
+                            <li>Sintassi colorata per gli snippet di codice</li>
+                            <li>Paginazione</li>
+                            <li>Supporto ai plugin</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Installazione</h2>
+                        <p style="text-align: left;">Requisiti: <code>Ruby</code></p>
+                        <pre><code>$ gem install jekyll</code></pre>
+                        <div class="fragment">
+                            <p style="text-align: left;">Creiamo il blog:</p>
+                            <pre><code>$ jekyll new mioBlog
+$ cd mioBlog</code></pre>
+                            <pre class="fragment"><code>$ ls
+about.md
+css
+feed.xml
+index.html
+_config.yml
+_includes
+_layouts
+_posts
+_sass
+</code></pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <pre><code>$ cat _config.yml
+title: Linux Day Blog
+email: info@linuxday.it
+description: Un blog sul Linux Day
+baseurl: /blog
+url: "http://linuxday.it"
+twitter_username: linuxday
+github_username:  ld15bari
+markdown: kramdown
+highlighter: pygments
+</code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Creazione di un post</h2>
+                        <pre><code>$ touch _posts/2015-10-24-linux-day-2015-bari.markdown
+$ cat _posts/2015-10-24-linux-day-2015-bari.markdown
+---
+layout: post
+title: Linux Day 2015 Bari
+date: 2015-10-24 12:00:00
+categories: [linux, linuxday]
+---
+*Ciao a tutti!*
+
+Benvenuti al __Linux Day 2015__ di Bari!
+
+Per info [ld15bari.github.io](https://ld15bari.github.io).
+</code></pre>
+                        <pre><code>$ ls
+default.html  page.html  post.html</pre></code>
+                    </section>
+
+                    <section>
+                        <h3>I layout</h3>
+                        <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  {% include head.html %}
+  &lt;body&gt;
+    {% include header.html %}
+    &lt;div class="page-content"&gt;
+      &lt;div class="wrapper"&gt;
+        {{ content }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+    {% include footer.html %}
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </section>
+
+                    <section>
+                        <pre><code>$ cat _layouts/post.html
+---
+layout: default
+---
+&lt;div class="post"&gt;
+  &lt;header class="post-header"&gt;
+    &lt;h1 class="post-title"&gt;{{ page.title }}&lt;/h1&gt;
+    &lt;p class="post-meta"&gt;{{ page.date | date: "%b %-d, %Y" }}
+	{% if page.author %} • {{ page.author }} {% endif %}
+	{% if page.meta %} • {{ page.meta }} {% endif %}&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;article class="post-content"&gt;
+    {{ content }}
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+					</section>
+
+                    <section>
+                        <h3>Generazione del sito</h3>
+                        <pre><code>$ jekyll build</code></pre>
+                        <pre class="fragment"><code>$ ls _site
+about  css  feed.xml  index.html  linux day
+$ ls _site/about
+index.html
+$ ls _site/linux/linux\ day/2015/10/24/
+linux-day-2015-bari.html</code></pre>
+                        <div class="fragment">
+                            <p style="text-align: left;">Per generare il sito e rigenerarlo ad ogni cambiamento:</p>
+                            <pre><code>$ jekyll build --watch</code></pre>
+                            <p style="text-align: left;">Per generare il sito e avviare un server HTTP sulla porta 4000:</p>
+                            <pre><code>$ jekyll serve</code></pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <img src="images/homepage.png">
+                    </section>
+
+                    <section>
+                        <img src="images/post.png">
+                    </section>
+
+                    <section>
+                        <img src="images/themes.png">
+                        <a href="http://jekyllthemes.org/">jekyllthemes.org</a>
+                    </section>
+                </section>
+
+				<section>
+					<h4>References</h4>
+					<ul>
+						<li><a href="http://jekyllrb.com/docs/quickstart/">http://jekyllrb.com/docs/quickstart/</a></li>
+                    	<li><a href="http://www.staticgen.com/">http://www.staticgen.com</a></li>
+					</ul>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<strong>Andrea Scarpino</strong>
+					<p>Software Developer involved in FOSS</p>
+					<a href="http://www.andreascarpino.it/">http://www.andreascarpino.it</a>
+                    <p>@ilpianista_ | git{hub,lab}.com/ilpianista</p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					//{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true }
+					//{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
